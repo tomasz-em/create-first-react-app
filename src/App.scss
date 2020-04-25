@@ -1,0 +1,46 @@
+.my-form {
+  margin: 100px auto;
+  padding: 2em;
+  max-width: 400px;
+  border: 2px solid #666;
+  background-color: #ccc;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 0.75em;
+  }
+
+  code {
+    display: block;
+    font-weight: bold;
+  }
+
+  input,
+  label,
+  button
+  {
+    font-size: 1.25em;
+    display: block;
+    width: 100%;
+    padding: 0.25em;;
+  }
+
+  label,
+  button,
+  input[type="submit"]
+  {
+    margin-top: 1em;
+    padding: 0.5em;
+  }
+
+  label {
+    font-size: 1em;
+  }
+
+  .error-text {
+    color: red;
+    font-weight: bold;
+    margin: 0;
+  }
+} /* .my-form-END */
+
