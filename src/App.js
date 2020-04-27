@@ -1,9 +1,36 @@
 import React from 'react';
-// import logo from './logo.svg';
 import './App.scss';    // możliwe użycie SASSa, po zmianie nazwy pliku i pobraniu "node-sass"...
 
-class Form extends React.Component {
-  // do trzymania stanu, np. dla zawartości pól formularza, to trzeba użyć komponentu stanowego
+const ThisPageInfo = () => {  // KOMPONENT FUNKCYJNY, czyli BEZSTANOWY 
+
+  return (
+    <React.Fragment>
+      {/*
+* może być zwracany JEDEN ELEMENT do węzła DOM, bez równożędnych (sąsiednich) elementów, więc używany był DIV jako opakowanie dla tej zawartości;
+    ...ale, czasami to burzyło prawidłową struktury HTMLa, przez taki kontener grupujący (np. dla elementów tabeli, ...)
+* użycie SKRÓTU SKŁADNI "<>" i "</>" dla objęcia całości zwracanych elementów JSX poprzez"<React.Fragment></React.Fragment>"
+* nie można użyć atrybutu HTMLa "class", które w JS jest SŁOWEM KLUCZOWYM, zamiennie "className" 
+*/}
+      <h2 className="blue-text">Pierwsze starcie z Reactem</h2>
+      <p>Cała wyświetlana teraz zawartość Stanowi jeden komponent <strong>App</strong>, który tworzą <em>ten</em> komponent <strong>ThisPageInfo
+        </strong> oraz właściwy komponent <strong>Form</strong> od wyświetlenia formularza. Bieżące informacje stanowią kolejne elementy DOM, 
+        będące sąsiadami.</p>
+      <h3>CEL: warunkowe wyświetlanie komponentu formularza logowania, uwzględniając jego wewnętrzny stan 
+        (standardowo wyświetla pola do uzupełnienia, a po ich przesłaniu trzyma status zalogowanego i przedstawia przesłaną zawartość).</h3>
+      <p>Wstępnie uzupełnione pola z przykładowymi danymi. Może tego nie widać, ale jest tu podpięty SASS (<em>node-sass</em>) ;)</p>
+      <h4>Polecenie weryfikacji fomularza:</h4>
+      <ul>
+        <li>przesłanie pustych pól nie powinno się udać</li>
+        <li>wyświetlenie niezbędnych komunikatów o błędzie</li>
+        <li>(wprowadzić prostą weryfikację dla poprawnego adresu email)</li>
+      </ul>
+    </React.Fragment>
+  );
+}
+
+
+class Form extends React.Component {  // KOMPONENT STANOWY
+  // do trzymania stanu, np. dla zawartości pól formularza, to trzeba użyć komponentu stanowego (stara notacja wewnątrz konstruktora)
   /* constructor () {
     super();  
 
@@ -69,14 +96,15 @@ class Form extends React.Component {
         { !this.state.isSubmited && (  // warunkowe wyświetlanie fragmentu danego komponentu WEWNĄTRZ danego komponentu - wariant FALSE
           <>
             <h2>Podaj swoje poświadczenia</h2> 
-            <label>e-mail</label>
-            <input type="text" name="email" onChange={this.handleEmailChange} value={this.state.email} />
+            <label htmlFor="email">e-mail</label>
+                {/* uwaga na atrybut "for"! zamiast tego słowa kluczowego tu MUSI BYĆ UŻYTE "htmlFor"  */}
+            <input type="text" id="email" name="email" onChange={this.handleEmailChange} value={this.state.email} />
             { this.state.isEmptyEmail ? (
               <p className="error-text">Pole emaila jest wymagane!</p> 
             ) : (null) }
 
-            <label>hasło</label>
-            <input type="password" name="pass" onChange={this.handlePassChange} value={this.state.password} />
+            <label htmlFor="pass">hasło</label>
+            <input type="password" id="pass" name="pass" onChange={this.handlePassChange} value={this.state.password} />
             { this.state.isEmptyPassword ? (
               <p className="error-text">Pole hasła jest wymagane!</p> 
             ) : (null) }
@@ -86,11 +114,17 @@ class Form extends React.Component {
         )}
 
         { this.state.isSubmited && (  //  warunkowe wyświetlanie fragmentu danego komponentu WEWNĄTRZ danego komponentu - wariant TRUE
-          <p>
-            <code>{this.state.email}</code>
-            <code>{this.state.password}</code>
-            <button onClick={this.handleLogout}>Logout</button>
-          </p>
+          <div>
+            <h2>Przesłana zawartość</h2> 
+            <p>
+              <label>e-mail:</label>
+              <code>{this.state.email}</code>
+              <br />
+              <label>hasło:</label>
+              <code>{this.state.password}</code>
+            </p>
+            <button onClick={this.handleLogout}>Wyloguj</button>
+          </div>  
         )}
         </form>
       </div>
@@ -100,18 +134,10 @@ class Form extends React.Component {
 
 const App = () => {
   return (
-    <div>
-      <h2 className="blue-text">Pierwsze starcie z Reactem</h2>
-      <h4>Umożliwia warunkowe wyświetlanie dla formularza logowania wraz z uwzględnieniem jego wewnętrznego stanu.</h4>
-      <p>Wstępnie uzupełnione pola z przykładowymi danymi.</p>
-      <h4>Polecenie weryfikacji fomularza:</h4>
-      <ul>
-        <li>przesłanie pustych pól nie powinno się udać dl ategop formularza.</li>
-        <li>wyświetlenie niezbędnych komunikatów o błędzie</li>
-        <li>...</li>
-      </ul>
-      <Form />
-    </div>
+    <>
+      <ThisPageInfo />  {/* jeden z dwóch warianktów użycia: jako TAG_DOMKNIĘTY */}
+      <Form></Form> {/* ...lub jak tu możliwy zapis wraz z wymaganym TAGIEM_ZAMYKAJĄCYM */} 
+    </>
   );
 }
 

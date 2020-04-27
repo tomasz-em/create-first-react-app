@@ -1,9 +1,9 @@
 .my-form {
-  margin: 100px auto;
+  margin: 60px auto;
   padding: 2em;
   max-width: 400px;
   border: 2px solid #666;
-  background-color: #ccc;
+  background-color: #c4d0f3;
 
   h2 {
     text-align: center;
@@ -11,12 +11,17 @@
   }
 
   code {
-    display: block;
-    font-weight: bold;
+     font-weight: bold;
+  }
+
+  code,
+  label 
+  {
+    display: inline-block;
+    font-size: 1em;
   }
 
   input,
-  label,
   button
   {
     font-size: 1.25em;
@@ -29,12 +34,15 @@
   button,
   input[type="submit"]
   {
-    margin-top: 1em;
-    padding: 0.5em;
+    margin-top: 0.5em;
+    padding: 0.25em;
   }
 
-  label {
-    font-size: 1em;
+  button,
+  input[type="submit"] {
+    margin-top: 1.5em;
+    padding: 0.75em;
+
   }
 
   .error-text {
