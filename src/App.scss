@@ -2,12 +2,22 @@
   margin: 60px auto;
   padding: 2em;
   max-width: 400px;
-  border: 2px solid #666;
+  border: 2px solid #333;
   background-color: #c4d0f3;
+  transition: background-color 0.4s, height 0.5s;
 
   h2 {
     text-align: center;
+    color:#222;
     margin-bottom: 0.75em;
+  }
+
+  h3 {
+  margin: 0;  
+  }
+
+  p {
+    margin: 0;
   }
 
   code {
@@ -50,5 +60,14 @@
     font-weight: bold;
     margin: 0;
   }
+
+  &.logged-in {
+    background-color: #c4f3d0;
+  }
+
+  &.login-error {
+    background-color: #f3c4d0;
+  }
+
 } /* .my-form-END */
 

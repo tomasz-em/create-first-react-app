@@ -11,17 +11,18 @@ const ThisPageInfo = () => {  // KOMPONENT FUNKCYJNY, czyli BEZSTANOWY
 * użycie SKRÓTU SKŁADNI "<>" i "</>" dla objęcia całości zwracanych elementów JSX poprzez"<React.Fragment></React.Fragment>"
 * nie można użyć atrybutu HTMLa "class", które w JS jest SŁOWEM KLUCZOWYM, zamiennie "className" 
 */}
-      <h2 className="blue-text">Pierwsze starcie z Reactem</h2>
-      <p>Cała wyświetlana teraz zawartość Stanowi jeden komponent <strong>App</strong>, który tworzą <em>ten</em> komponent <strong>ThisPageInfo
-        </strong> oraz właściwy komponent <strong>Form</strong> od wyświetlenia formularza. Bieżące informacje stanowią kolejne elementy DOM, 
+      <h1 className="blue-text">Pierwsze starcie z Reactem</h1>
+      <p>Cała wyświetlana teraz zawartość stanowi jeden komponent <strong>App</strong>, który tworzą <em>ten</em> komponent <strong>ThisPageInfo
+        </strong> oraz właściwy komponent <strong>Form</strong> od wyświetlenia formularza. Bieżące informacje tworzą kolejne elementy DOM, 
         będące sąsiadami.</p>
-      <h3>CEL: warunkowe wyświetlanie komponentu formularza logowania, uwzględniając jego wewnętrzny stan 
-        (standardowo wyświetla pola do uzupełnienia, a po ich przesłaniu trzyma status zalogowanego i przedstawia przesłaną zawartość).</h3>
-      <p>Wstępnie uzupełnione pola z przykładowymi danymi. Może tego nie widać, ale jest tu podpięty SASS (<em>node-sass</em>) ;)</p>
+      <h2>CEL: warunkowe wyświetlanie komponentu formularza logowania, uwzględniając jego wewnętrzny stan 
+        (standardowo wyświetla pola do uzupełnienia, a po ich przesłaniu trzyma status zalogowanego i przedstawia przesłaną zawartość).</h2>
+      <p>Wstępnie prezentowane są już uzupełnione pola formularza z przykładowymi danymi. Może tego nie widać, ale jest tu podpięty SASS (<em>node-sass</em>) ;)</p>
       <h4>Polecenie weryfikacji fomularza:</h4>
       <ul>
         <li>przesłanie pustych pól nie powinno się udać</li>
         <li>wyświetlenie niezbędnych komunikatów o błędzie</li>
+        <li>graficzna interpretacja trójstanowego stanu formularza: gotowy/błędny/zalogowany jako alegoria dla utartych znaczeń kolorów</li>
         <li>(wprowadzić prostą weryfikację dla poprawnego adresu email)</li>
       </ul>
     </React.Fragment>
@@ -41,6 +42,7 @@ class Form extends React.Component {  // KOMPONENT STANOWY
   state = {
     email: 'ktos@gdzies.pl',
     password: 'pa$$',
+    isLoginError: false,
     isSubmited: false,
     isEmptyEmail: false,
     isEmptyPassword: false
@@ -55,12 +57,13 @@ class Form extends React.Component {  // KOMPONENT STANOWY
         this.setState({ 
           isSubmited: true,
           isEmptyEmail: false,
-          isEmptyPassword: false
+          isEmptyPassword: false,
+          isLoginError: false
        });
       } 
       else {
-        if ( this.state.email.length <= 0 ) this.setState({ isEmptyEmail: true });
-        if ( this.state.password.length <= 0 ) this.setState({ isEmptyPassword: true });
+        if ( this.state.email.length <= 0 ) this.setState({ isEmptyEmail: true, isLoginError: true });
+        if ( this.state.password.length <= 0 ) this.setState({ isEmptyPassword: true, isLoginError: true });
       }
   }
 
@@ -90,7 +93,7 @@ class Form extends React.Component {  // KOMPONENT STANOWY
 
   render() {  // Z OBSŁUGĄ WARUNKOWEGO WYŚWIETLANIA ZAWARTOŚCI KOMPONENTU, TAKŻE WYBRANE OBSZARY KOMPONENTU.. zależnie od warunku 
     return (
-      <div className="my-form">
+      <div className={this.state.isSubmited ? "my-form logged-in" : (this.state.isLoginError) ? "my-form login-error" : "my-form" /* tu logika jest słaba, odwołuje się w rodzicu do warunku co poniżej */} >
         <form onSubmit={this.handleLogin}>
 
         { !this.state.isSubmited && (  // warunkowe wyświetlanie fragmentu danego komponentu WEWNĄTRZ danego komponentu - wariant FALSE
@@ -113,9 +116,10 @@ class Form extends React.Component {  // KOMPONENT STANOWY
           </>
         )}
 
-        { this.state.isSubmited && (  //  warunkowe wyświetlanie fragmentu danego komponentu WEWNĄTRZ danego komponentu - wariant TRUE
+        { this.state.isSubmited && (  //  warunkowe wyświetlanie fragmentu danego komponentu WEWNĄTRZ danego komponentu - wariant TRUE -- "zalogowany"
           <div>
-            <h2>Przesłana zawartość</h2> 
+            <h2>Jesteś zalogowany</h2> 
+            <h3>Przesłana zawartość</h3> 
             <p>
               <label>e-mail:</label>
               <code>{this.state.email}</code>
