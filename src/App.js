@@ -4,20 +4,21 @@ import './App.scss';    // możliwe użycie SASSa, po zmianie nazwy pliku i pobr
 const ThisPageInfo = () => {  // KOMPONENT FUNKCYJNY, czyli BEZSTANOWY 
 
   return (
-    <React.Fragment>
+    <div>
       {/*
-* może być zwracany JEDEN ELEMENT do węzła DOM, bez równożędnych (sąsiednich) elementów, więc używany był DIV jako opakowanie dla tej zawartości;
-    ...ale, czasami to burzyło prawidłową struktury HTMLa, przez taki kontener grupujący (np. dla elementów tabeli, ...)
+* może być zwracany JEDEN ELEMENT do węzła DOM, bez równorzędnych (sąsiednich) elementów, więc używany był DIV jako opakowanie dla tej zwracanej
+    zawartości...ale, czasami to burzyło prawidłową struktury HTMLa, przez taki kontener grupujący (np. dla elementów tabeli, ...)
 * użycie SKRÓTU SKŁADNI "<>" i "</>" dla objęcia całości zwracanych elementów JSX poprzez"<React.Fragment></React.Fragment>"
 * nie można użyć atrybutu HTMLa "class", które w JS jest SŁOWEM KLUCZOWYM, zamiennie "className" 
-*/}
+  */}
       <h1 className="blue-text">Pierwsze starcie z Reactem</h1>
       <p>Cała wyświetlana teraz zawartość stanowi jeden komponent <strong>App</strong>, który tworzą <em>ten</em> komponent <strong>ThisPageInfo
-        </strong> oraz właściwy komponent <strong>Form</strong> od wyświetlenia formularza. Bieżące informacje tworzą kolejne elementy DOM, 
+        </strong> oraz właściwy komponent <strong>LoginForm</strong> od wyświetlenia formularza. Bieżące informacje tworzą kolejne elementy DOM, 
         będące sąsiadami.</p>
       <h2>CEL: warunkowe wyświetlanie komponentu formularza logowania, uwzględniając jego wewnętrzny stan 
         (standardowo wyświetla pola do uzupełnienia, a po ich przesłaniu trzyma status zalogowanego i przedstawia przesłaną zawartość).</h2>
-      <p>Wstępnie prezentowane są już uzupełnione pola formularza z przykładowymi danymi. Może tego nie widać, ale jest tu podpięty SASS (<em>node-sass</em>) ;)</p>
+      <p>Wstępnie prezentowane są już uzupełnione pola formularza z przykładowymi danymi. Może tego nie widać, ale jest tu podpięty SASS (<em>node-sass</em>) ;) 
+        oraz niewielka responsywność z zamianą kolejności treści (próg 700px szerokości ekranu).</p>
       <h4>Polecenie weryfikacji fomularza:</h4>
       <ul>
         <li>przesłanie pustych pól nie powinno się udać</li>
@@ -25,19 +26,19 @@ const ThisPageInfo = () => {  // KOMPONENT FUNKCYJNY, czyli BEZSTANOWY
         <li>graficzna interpretacja trójstanowego stanu formularza: gotowy/błędny/zalogowany jako alegoria dla utartych znaczeń kolorów</li>
         <li>(wprowadzić prostą weryfikację dla poprawnego adresu email)</li>
       </ul>
-    </React.Fragment>
+    </div>
   );
 }
 
 
-class Form extends React.Component {  // KOMPONENT STANOWY
+class LoginForm extends React.Component {  // KOMPONENT STANOWY
   // do trzymania stanu, np. dla zawartości pól formularza, to trzeba użyć komponentu stanowego (stara notacja wewnątrz konstruktora)
-  /* constructor () {
-    super();  
+      /* constructor () {
+        super();  
 
-    this.email = 'ktos@gdzies.pl';
-    this.password = 'NIC'; 
-  } */
+        this.email = 'ktos@gdzies.pl';
+        this.password = 'NIC'; 
+      } */
 
   state = {
     email: 'ktos@gdzies.pl',
@@ -45,8 +46,8 @@ class Form extends React.Component {  // KOMPONENT STANOWY
     isLoginError: false,
     isSubmited: false,
     isEmptyEmail: false,
-    isEmptyPassword: false
-
+    isEmptyPassword: false  // można pisać nawet Z PRZECINKLIEM PO OSTATNIM ATRYBUCIE (zmienia się jedna linmia w gicie), 
+        // ES6 to przyjmuje (lub transpiler do ES5 zamieni jak trzeba?)
   }
 
   handleLogin = (evt) => {  // też dla submit używane
@@ -93,7 +94,7 @@ class Form extends React.Component {  // KOMPONENT STANOWY
 
   render() {  // Z OBSŁUGĄ WARUNKOWEGO WYŚWIETLANIA ZAWARTOŚCI KOMPONENTU, TAKŻE WYBRANE OBSZARY KOMPONENTU.. zależnie od warunku 
     return (
-      <div className={this.state.isSubmited ? "my-form logged-in" : (this.state.isLoginError) ? "my-form login-error" : "my-form" /* tu logika jest słaba, odwołuje się w rodzicu do warunku co poniżej */} >
+      <div className={this.state.isSubmited ? "my-login-form logged-in" : (this.state.isLoginError) ? "my-login-form login-error" : "my-login-form" /* tu logika jest słaba, odwołuje się w rodzicu do warunku co poniżej */} >
         <form onSubmit={this.handleLogin}>
 
         { !this.state.isSubmited && (  // warunkowe wyświetlanie fragmentu danego komponentu WEWNĄTRZ danego komponentu - wariant FALSE
@@ -137,11 +138,19 @@ class Form extends React.Component {  // KOMPONENT STANOWY
 } 
 
 const App = () => {
+  /*
+* może być zwracany JEDEN ELEMENT do węzła DOM, bez równorzędnych (sąsiednich) elementów, więc używany był DIV jako opakowanie dla tej zwracanej
+  zawartości...ale, czasami to burzyło prawidłową struktury HTMLa, przez taki kontener grupujący (np. dla elementów tabeli, ...)
+* użycie SKRÓTU SKŁADNI "<>" i "</>" dla objęcia całości zwracanych elementów JSX poprzez"<React.Fragment></React.Fragment>"
+    - <React.Fragment> === <>
+* nie można użyć atrybutu HTMLa "class", które w JS jest SŁOWEM KLUCZOWYM, zamiennie "className" 
+  */
+
   return (
-    <>
-      <ThisPageInfo />  {/* jeden z dwóch warianktów użycia: jako TAG_DOMKNIĘTY */}
-      <Form></Form> {/* ...lub jak tu możliwy zapis wraz z wymaganym TAGIEM_ZAMYKAJĄCYM */} 
-    </>
+    <React.Fragment>
+      <ThisPageInfo />  {/* jeden z dwóch wariantów użycia: jako TAG_DOMKNIĘTY */}
+      <LoginForm></LoginForm> {/* ...lub jak tu możliwy zapis wraz z wymaganym TAGIEM_ZAMYKAJĄCYM */}
+    </React.Fragment>
   );
 }
 
