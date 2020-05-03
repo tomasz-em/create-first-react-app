@@ -55,6 +55,10 @@
 
   }
 
+  label > span {
+    color: red;
+  }
+
   .error-text {
     color: red;
     font-weight: bold;
@@ -67,6 +71,15 @@
 
   &.login-error {
     background-color: #f3c4d0;
+  }
+
+  .info {
+    font-size: 1em;
+    text-align: justify;
+    padding: 0.5em;
+    margin-left: -0.5em;
+    margin-right: -0.5em;
+    border: solid 1px #666;
   }
 
 } /* .my-login-form_END */
