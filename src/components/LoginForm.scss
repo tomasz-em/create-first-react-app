@@ -1,0 +1,87 @@
+@import '../partials/colors';   /* zdefiniowane kolory */
+
+.my-login-form {
+  margin: 60px auto;
+  padding: 2em;
+  max-width: 400px;
+  border: 2px solid #333;
+  background-color: $form-bgc-normal; /* #c4d0f3; */
+  transition: background-color 0.4s, height 0.5s;
+
+  h2 {
+    text-align: center;
+    color:#222;
+    margin-bottom: 0.75em;
+  }
+
+  h3 {
+  margin: 0;  
+  }
+
+  p {
+    margin: 0;
+  }
+
+  code {
+      font-weight: bold;
+  }
+
+  code,
+  label 
+  {
+    display: inline-block;
+    font-size: 1em;
+  }
+
+  input,
+  button
+  {
+    font-size: 1.25em;
+    display: block;
+    width: 100%;
+    padding: 0.25em;;
+  }
+
+  label,
+  button,
+  input[type="submit"]
+  {
+    margin-top: 0.5em;
+    padding: 0.25em;
+  }
+
+  button,
+  input[type="submit"] {
+    margin-top: 1.5em;
+    padding: 0.75em;
+
+  }
+
+  label > span {
+    color: red;
+  }
+
+  .error-text {
+    color: red;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .info {
+    font-size: 1em;
+    text-align: justify;
+    padding: 0.5em;
+    margin-left: -0.5em;
+    margin-right: -0.5em;
+    border: solid 1px #666;
+  }
+  
+  &.logged-in {
+    background-color: $form-bgc-logged; /* #c4f3d0; */
+  }
+
+  &.login-error {
+    background-color: $form-bgc-error; /* #f3c4d0; */
+  }
+
+} /* .my-login-form_END */

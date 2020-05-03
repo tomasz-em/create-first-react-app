@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class App extends Component {
+class App extends Component { // "Component" bez "React." na początku, bo taki import dodatkowy
   state = {
     email: '',
     password: '',
