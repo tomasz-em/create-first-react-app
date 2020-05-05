@@ -1,68 +1,58 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React
+### _Wstęp do biblioteki React_, **zjazd 7** `2020 IV 25`
 
-## Available Scripts
+### Używanie Reacta poprzez środowisko **node** do ulepszonych działań na węzłach DOM
+Dokumentacja: [https://reactjs.org](https://reactjs.org)  
+Repozytorium github: [https://github.com/facebook/react](https://github.com/facebook/react)
 
-In the project directory, you can run:
+### Podstawowe koncepcje, architektura, komponenty, cykl życia aplikacji
 
-### `npm start`
+* paradygmat **programowania deklaratywnego** (też **funkcyjnego** ) kontra **programowania imperatywnego** ( też **proceduralnego**)
+* szybki start _tego_ projektu jako wynikowego z użycia pakietu `create-react-app` dla gotowej konfiguracji biblioteki i środowiska
+* utworzenie pierwszego komponentu
+* definiowanie **komponentów bezstanowych** oraz **komponentów stanowych**
+* przekazywanie parametrów pomiędzy komponentami
+* definiowanie parametrów, ich typów oraz domyślnych wartości
+* definicja stanu komponentu, ustawianie stanu za pomocą metody `setState`
+* używanie zagnieżdżonych komponentów, dostęp do wewnętrznych struktur poprzez `props.children`
+* cykl życia komponentu
+* konstrukcje warunkowe i pętle w komponentach _reacta_
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### **Create React App** jako ułatwiony start w ekosystemie Reacta - pakiet **create-react-app**
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Dokumentacja: [https://create-react-app.dev/docs/getting-started/](https://create-react-app.dev/docs/getting-started/)  
+Repozytorium github: [https://github.com/facebook/create-react-app](https://github.com/facebook/create-react-app)
 
-### `npm test`
+_____
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Utworzenie pierwszego komponentu
 
-### `npm run build`
+### Pierwsze kroki z komponentami 
+Komponent formularza logowania do witryny. Wersja podstawowa wymaga podania na wstępie dowolnej zawartości do dwóch pól tekstowych z rzeczowym opisem. Jeśli przesłano _cokolwiek_ w **obu polach**, to komponent powinien zaakceptować te dane i je wyświetlić. Powienien też przejść do wewnętrznego stanu _zalogowany_. Powrót do stanu _niezalogoany_ po naciśnięciu dostępnego przycisku.
+* dla łatwiejszego korzystania można formularz wstępnie wypełnić "przykładowymi danymi" 
+* wersja ulepszona powinna przyjmować tylko prawidłowy adres email (o prawidłowej strukturze **standardowego** adresu)
+* wszelkie błędy we wprowadzonych wartościach powinny być wyświetlone na bieżąco (zależnie od przyjętego poziomu błędów i wymaganej jakości danych wejściowych)
+* komponent winien prezentować swój stan w graficznej formie: niezalogowany (gotowy) / zalogowany / źle wypełniony
+* ...
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## **Działający przykład [https://create-first-react-app.now.sh/](https://create-first-react-app.now.sh/)**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Uruchomienie (skrypty uruchamiające z domyślnego pakietu *create-react-app*)
+**Oczywiście wymaga środowiska uruchomieniowego node!**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* Wykonaj **instalację lokalną** dla podległych zaległości, z których korzysta ten projekt: `npm install`.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* **Startuj poprzez** `npm start` - uruchomi się w trybie deweloperskim, co pozwala na łatwe testowanie i ewentualną edycję projektu.
+Po uruchomieniu projekt wyświetli się w oknie domyślnej przeglądarki pod adresem [http://localhost:3000/](http://localhost:3000/).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+UWAGA: witryna przeładowuje się na bieżąco podczas edycji plików źródłowych. Wszelkie błędy będą widoczne w konsoli oraz w aktywnym oknie przeglądarki www. Wtedy aplikacja nie skompiluje się, a także nie uruchomi się!
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* `npm test` staruje interaktywny tryb **uruchamiania testów**. 
 
-## Learn More
+* `npm run build` powoduje **zbudowanie aplikacji** dla celów *produkcyjnych*, wynik działania w folderze `build`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+* O `npm run eject` nie piszę, dokumentacja _tego pakietu startowego_ szczegółowo do uwzględnia.
